@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/died.wav-585e5a8c393acab420801d2ba610ac3b.sample"
+
+[deps]
+
+source_file="res://player/died.wav"
+dest_files=[ "res://.import/died.wav-585e5a8c393acab420801d2ba610ac3b.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

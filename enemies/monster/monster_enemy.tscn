@@ -1,0 +1,179 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://enemies/monster/monster_enemy.gd" type="Script" id=1]
+[ext_resource path="res://enemies/monster/wormhole.png" type="Texture" id=2]
+[ext_resource path="res://enemies/monster/monster.png" type="Texture" id=3]
+[ext_resource path="res://enemies/hit_enemy.wav" type="AudioStream" id=4]
+[ext_resource path="res://player/gun.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "spawn"
+length = 2.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wormhole:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 300.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Wormhole:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 0.7, 0.7 ), Vector2( 0.7, 0.7 ), Vector2( 1e-005, 1e-005 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Wormhole:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 1e-005, 1e-005 ), Vector2( 0.3, 0.3 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 2.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start"
+} ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 30.2135
+height = 89.7471
+
+[node name="MonsterEnemy" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 8
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="Wormhole" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 1e-005, 1e-005 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+scale = Vector2( 1e-005, 1e-005 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="SpawnAnimation" type="AnimationPlayer" parent="." index="2"]
+
+root_node = NodePath("..")
+autoplay = "spawn"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/spawn = SubResource( 1 )
+blend_times = [  ]
+
+[node name="CollisionVertical" type="CollisionShape2D" parent="." index="3"]
+
+shape = SubResource( 2 )
+
+[node name="CollisionHorizontal" type="CollisionShape2D" parent="." index="4"]
+
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="5"]
+
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="GunTop" type="Node2D" parent="." index="6"]
+
+position = Vector2( -0.540344, -50.7939 )
+script = ExtResource( 5 )
+firerate = 1.2
+spread = 0.1
+min_damage = 10.0
+max_damage = 15.0
+friendly = false
+expand_map = true
+
+[node name="GunLeft" type="Node2D" parent="." index="7"]
+
+position = Vector2( -51.3342, -1.62108 )
+script = ExtResource( 5 )
+firerate = 1.2
+spread = 0.1
+min_damage = 10.0
+max_damage = 15.0
+friendly = false
+expand_map = true
+
+[node name="GunRight" type="Node2D" parent="." index="8"]
+
+position = Vector2( 51.3342, 0 )
+script = ExtResource( 5 )
+firerate = 1.2
+spread = 0.1
+min_damage = 10.0
+max_damage = 15.0
+friendly = false
+expand_map = true
+
+[node name="GunBot" type="Node2D" parent="." index="9"]
+
+position = Vector2( 1.62106, 48.6324 )
+script = ExtResource( 5 )
+firerate = 1.2
+spread = 0.1
+min_damage = 10.0
+max_damage = 15.0
+friendly = false
+expand_map = true
+
+

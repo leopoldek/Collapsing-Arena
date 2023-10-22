@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Interstellar Odyssey.ogg-f114caeea05677bfd15f61c5225da44e.oggstr"
+
+[deps]
+
+source_file="res://music/Interstellar Odyssey.ogg"
+dest_files=[ "res://.import/Interstellar Odyssey.ogg-f114caeea05677bfd15f61c5225da44e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

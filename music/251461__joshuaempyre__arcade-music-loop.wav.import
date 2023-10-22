@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/251461__joshuaempyre__arcade-music-loop.wav-6340cd1fc2bfb3baf610efd83cd18f6c.sample"
+
+[deps]
+
+source_file="res://music/251461__joshuaempyre__arcade-music-loop.wav"
+dest_files=[ "res://.import/251461__joshuaempyre__arcade-music-loop.wav-6340cd1fc2bfb3baf610efd83cd18f6c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

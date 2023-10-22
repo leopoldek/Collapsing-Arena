@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://map/background.gd" type="Script" id=1]
+
+[node name="Background" type="Polygon2D" index="0"]
+
+z_index = -100
+polygon = PoolVector2Array(  )
+uv = PoolVector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Invert", "Z Index" ]
+
+[node name="Border" type="Line2D" parent="." index="0"]
+
+points = PoolVector2Array(  )
+width = 20.0
+default_color = Color( 0, 0, 0, 1 )
+texture_mode = 1
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 2.0
+round_precision = 5
+_sections_unfolded = [ "Border", "Capping" ]
+
+

@@ -1,0 +1,156 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemies/basic/basic_enemy.gd" type="Script" id=1]
+[ext_resource path="res://circle.png" type="Texture" id=2]
+[ext_resource path="res://enemies/basic/basic_enemy.png" type="Texture" id=3]
+[ext_resource path="res://player/gun.gd" type="Script" id=4]
+[ext_resource path="res://enemies/hit_enemy.wav" type="AudioStream" id=5]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.401198, 0.682635, 1 )
+colors = PoolColorArray( 1, 0.945251, 0.730469, 0.723725, 0.824219, 0.577718, 0.260788, 0.613255, 0.906836, 0.22829, 0.138218, 0.397804, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="ParticlesMaterial" id=3]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 0.1, 8, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.0
+angular_velocity = 10.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.06
+scale_random = 0.0
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Initial Velocity", "Scale" ]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 15.0153, 20.2547 )
+
+[node name="BasicEnemy" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 8
+collision_mask = 3
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="TopEngine" type="Particles2D" parent="." index="0"]
+
+position = Vector2( -49.2175, -25.0032 )
+rotation = -3.14159
+emitting = true
+amount = 200
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 3 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Textures", "Transform" ]
+
+[node name="BotEngine" type="Particles2D" parent="." index="1"]
+
+position = Vector2( -50.293, 24.6447 )
+rotation = -3.14159
+emitting = true
+amount = 200
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 3 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Textures", "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="2"]
+
+rotation = 1.5708
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Collision" type="CollisionShape2D" parent="." index="3"]
+
+shape = SubResource( 4 )
+
+[node name="Gun" type="Node2D" parent="." index="4"]
+
+position = Vector2( 39.075, 0 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+firerate = 0.8
+spread = 0.07
+min_damage = 5.0
+max_damage = 20.0
+friendly = false
+expand_map = false
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="5"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+

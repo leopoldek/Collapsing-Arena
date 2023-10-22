@@ -1,0 +1,304 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://circle.png" type="Texture" id=2]
+[ext_resource path="res://player/tail.gd" type="Script" id=3]
+[ext_resource path="res://arrow.png" type="Texture" id=4]
+[ext_resource path="res://player/gun.gd" type="Script" id=5]
+[ext_resource path="res://player/shoot.wav" type="AudioStream" id=6]
+[ext_resource path="res://player/died.wav" type="AudioStream" id=7]
+[ext_resource path="res://player/hit.wav" type="AudioStream" id=8]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0.0988024, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 32.0
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "died"
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Circle:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Circle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Died/DiedParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TailSeperator/Tail:width")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64.0, 0.0 ]
+}
+
+[sub_resource type="Gradient" id=4]
+
+offsets = PoolRealArray( 0, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+
+flags = 4
+gradient = SubResource( 4 )
+width = 2048
+
+[sub_resource type="Curve" id=6]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.918886, 0.392578 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+
+flags = 4
+width = 2048
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 400.0
+initial_velocity_random = 0.3
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.45
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = -80.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 0.06
+scale_random = 0.1
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Damping", "Initial Velocity", "Orbit Velocity", "Radial Accel", "Scale" ]
+
+[node name="Player" type="KinematicBody2D" index="0"]
+
+z_index = 100
+input_pickable = false
+collision_layer = 1
+collision_mask = 11
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Z Index" ]
+
+[node name="Circle" type="Sprite" parent="." index="0"]
+
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="TailSeperator" type="Node" parent="." index="1"]
+
+[node name="Tail" type="Line2D" parent="TailSeperator" index="0"]
+
+pause_mode = 2
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 64.0
+default_color = Color( 0, 0, 0, 1 )
+gradient = SubResource( 1 )
+texture_mode = -7913950
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 2.0
+round_precision = 4
+script = ExtResource( 3 )
+_sections_unfolded = [ "Border", "Capping", "Fill", "Pause" ]
+
+[node name="Camera" type="Camera2D" parent="." index="2"]
+
+pause_mode = 2
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 3, 3 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 4.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Pause", "Smoothing" ]
+
+[node name="Collision" type="CollisionShape2D" parent="." index="3"]
+
+shape = SubResource( 2 )
+
+[node name="AimIndicator" type="Node2D" parent="." index="4"]
+
+[node name="AimIcon" type="Sprite" parent="AimIndicator" index="0"]
+
+position = Vector2( 60, 0 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AngleIcon" type="Sprite" parent="." index="5"]
+
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 60, 0 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Gun" type="Node2D" parent="." index="6"]
+
+script = ExtResource( 5 )
+firerate = 0.1
+spread = 0.0349066
+min_damage = 20.0
+max_damage = 45.0
+friendly = true
+expand_map = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="." index="7"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="Died" type="Node2D" parent="." index="8"]
+
+pause_mode = 2
+_sections_unfolded = [ "Pause" ]
+
+[node name="DiedSound" type="AudioStreamPlayer2D" parent="Died" index="0"]
+
+stream = ExtResource( 7 )
+volume_db = 5.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="DiedAnimation" type="AnimationPlayer" parent="Died" index="1"]
+
+root_node = NodePath("../..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/died = SubResource( 3 )
+blend_times = [  ]
+
+[node name="DiedParticles" type="Particles2D" parent="Died" index="2"]
+
+emitting = false
+amount = 800
+lifetime = 2.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -179.884, -179.781, 358.176, 359.687 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 8 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="9"]
+
+stream = ExtResource( 8 )
+volume_db = -20.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+
